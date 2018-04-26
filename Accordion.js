@@ -24,11 +24,13 @@ export default class Accordion extends Component {
     underlayColor: PropTypes.string,
     touchableComponent: PropTypes.func,
     touchableProps: PropTypes.object,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
     underlayColor: 'black',
     touchableComponent: TouchableOpacity,
+    disabled: false,
   };
 
   constructor(props) {
@@ -54,12 +56,16 @@ export default class Accordion extends Component {
   _toggleSection(section) {
     const activeSection =
       this.state.activeSection === section ? false : section;
+    if (!this.props.disabled) {
+      const activeSection =
+        this.state.activeSection === section ? false : section;
 
     if (this.props.activeSection === undefined) {
-      this.setState({ activeSection });
-    }
-    if (this.props.onChange) {
-      this.props.onChange(activeSection);
+        this.setState({ activeSection });
+      }
+      if (this.props.onChange) {
+        this.props.onChange(activeSection);
+      }
     }
   }
 
